@@ -9,8 +9,10 @@
     - [x] `C` button to clear input fields
 - [] server-side logic to compute operations
     - [x] receives operations symbol
-    - [] stores operations symbol somewhere
+    - [<!-- x -->] stores operations symbol somewhere  
+             <!-- not sure if should place array into module -->
     - [] can handle addition, subtraction, multiplication and division
+        - [] may be possible to store inputs in module and output results from same module
     - [] after calc is complete, send back OK `sendStatus(200)` ???
     - [] do a GET request after the POST to get the actual calc
 

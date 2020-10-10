@@ -60,3 +60,7 @@ function operationsSelector(){
         alert(error);
     });
 }
+
+
+
+// maybe write a GET request after the POST, in function get numbers
