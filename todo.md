@@ -5,7 +5,7 @@
     - [] submit button `=`
         - [] capture inputs
         - [] bundle into object
-        - [] sned object to server via POST
+        - [] send object to server via POST
     - [] `C` button to clear input fields
 - [] server-side logic to compute operations
     - [] can handle addition, subtraction, multiplication and division
