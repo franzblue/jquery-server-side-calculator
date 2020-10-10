@@ -1,13 +1,15 @@
 ## Calculator
 
 - [] user input
-    - [] two input elements
+    - [x] two input elements
     - [] submit button `=`
-        - [] capture inputs
-        - [] bundle into object
-        - [] send object to server via POST
-    - [] `C` button to clear input fields
+        - [x] capture inputs
+        - [x] bundle into object
+        - [x] send object to server via POST
+    - [x] `C` button to clear input fields
 - [] server-side logic to compute operations
+    - [x] receives operations symbol
+    - [] stores operations symbol somewhere
     - [] can handle addition, subtraction, multiplication and division
     - [] after calc is complete, send back OK `sendStatus(200)` ???
     - [] do a GET request after the POST to get the actual calc

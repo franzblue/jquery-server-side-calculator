@@ -12,7 +12,19 @@ app.listen(port, () => {
 });
 
 
+// still need to store this value and use it later
 app.post('/operations', (req, res) => {
     console.log('hello from POST', req.body);
+    operations.push(req.body);
     res.sendStatus(200);
 });
+
+app.post('/numberMunchers', (req, res) => {
+    console.log('hello from POST', req.body);
+    answer.push(req.body);
+    res.sendStatus(200);
+});
+
+
+answer = [];
+operations = [];
