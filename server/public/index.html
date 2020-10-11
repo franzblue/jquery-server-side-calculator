@@ -13,12 +13,12 @@
     <div>
         <h2>Server Side Calculator</h2>
         <input id="firstNumber" type="number"/>
-            <button id="addition" class="operations" value="+">+</button>
-            <button id="minus" class="operations" value="-">-</button>
-            <button id="multiply" class="operations" value="*">*</button>
-            <button id="divide" class="operations" value="/">/</button>
+            <button class="operator" value="+" id="addition">+</button>
+            <button class="operator" value="-" id="subtraction">-</button>
+            <button class="operator" value="*" id="division">*</button>
+            <button class="operator" value="/" id="multiplication">/</button>
         <input id="secondNumber" type="number"/>
-            <button id="equals" type="submit">=</button>
+            <button id="submit" type="submit">=</button>
             <button id="clear">C</button>
     </div>
     <section id="answerHistory">
@@ -29,4 +29,4 @@
 </body>
 </html>
 
-<!-- I think I can remove the id's from the class="operations" buttons -->
+<!-- I think I can remove the id's from the class="operator" buttons -->

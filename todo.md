@@ -1,8 +1,8 @@
 ## Calculator
 
-- [] user input
+- [x] user input
     - [x] two input elements
-    - [] submit button `=`
+    - [x] submit button `=`
         - [x] capture inputs
         - [x] bundle into object
         - [x] send object to server via POST
@@ -34,6 +34,7 @@
     - [] check reference photo
 - [] only allow POST to call if all inputs are ready
     - [] show an alert if they left something empty
+        - [] ask if operators button are disabled
     - [] don't send bad or incomplete data to server
 - [] allow user to clear history
     - [] button click

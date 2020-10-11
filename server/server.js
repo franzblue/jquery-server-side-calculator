@@ -12,45 +12,72 @@ app.listen(port, () => {
 });
 
 // still need to store this value and use it later
-app.post('/operations', (req, res) => {
+app.post('/operator', (req, res) => {
     console.log('hello from POST', req.body);
-    operations.push(req.body);
+    operatorValues.push(req.body);
     res.sendStatus(200);
 });
 
 app.post('/numberMunchers', (req, res) => {
     console.log('hello from POST', req.body);
-    answer.push(req.body);
+    calculateThis.push(req.body);
     res.sendStatus(200);
 });
 
-answer = [];
-operations = [];
+calculateThis = [];
+operatorValues = [];
 
-// function numberMuncher(answer, operations, counter){
-//     console.log('numberMuncher', answer[counter].firstNumber, operations[counter], answer[counter].secondNumber);
+// function numberMuncher(inputValues, operatorValues, counter){
+//     console.log('numberMuncher', answer[counter].firstNumber, operatorValues[counter], inputValues[counter].secondNumber);
 // }
 
-// console.log(numberMuncher(answer, operations, counter));
+// console.log(numberMuncher(inputValues, operatorValues, counter));
 
-// function numberMuncherVersionTwo(answer, operations, counter){
-//     if(operations[counter] === '='){
-//         let result = answer[counter].firstNumber + answer[counter].secondNumber;
+// function numberMuncherVersionTwo(inputValues, operatorValues, counter){
+//     if(operatorValues[counter] === '='){
+//         let result = inputValues[counter].firstNumber + inputValues[counter].secondNumber;
 //         return result;
 //     }
-//     else if(operations[counter] === '-'){
-//         let result = answer[counter].firstNumber - answer[counter].secondNumber;
+//     else if(operatorValues[counter] === '-'){
+//         let result = inputValues[counter].firstNumber - inputValues[counter].secondNumber;
 //         return result;
 //     }
-//     else if(operations[counter] === '*'){
-//         let result = answer[counter].firstNumber * answer[counter].secondNumber;
+//     else if(operatorValues[counter] === '*'){
+//         let result = inputValues[counter].firstNumber * inputValues[counter].secondNumber;
 //         return result;
 //     }
-//     else if(operations === '/'){
-//         let result = answer[counter].firstNumber / answer[counter].secondNumber;
+//     else if(operatorValues === '/'){
+//         let result = inputValues[counter].firstNumber / inputValues[counter].secondNumber;
 //         return result;
 //     }
 //     else {
 //         alert('Please enter correct inputs')
 //     }
 // }
+
+
+// something weird brewing down below
+
+// app.post('/addition', (req, res) => {
+//     console.log('hello from +POST+', req.body);
+//     addition.push(req.body);
+//     res.sendStatus(200);
+// });
+
+// app.post('/subtraction', (req, res) => {
+//     console.log('hello from -POST-', req.body);
+//     addition.push(req.body);
+//     res.sendStatus(200);
+// });
+
+// app.post('/multiplication', (req, res) => {
+//     console.log('hello from *POST*', req.body);
+//     addition.push(req.body);
+//     res.sendStatus(200);
+// });
+
+// app.post('/division', (req, res) => {
+//     console.log('hello from /POST/', req.body);
+//     addition.push(req.body);
+//     res.sendStatus(200);
+// });
