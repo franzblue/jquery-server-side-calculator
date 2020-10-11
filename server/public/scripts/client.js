@@ -5,14 +5,94 @@ $(document).ready(onReady);
 // let calculationBundle = 0;
 
 function onReady() {
+    getData();
     console.log('Hello from jQuery');
     $('.operator').on('click', gatherInputs);
     $('#clear').on('click', clearInputs);
-    // $('#submit').on('click', sendData);
+    $('#submit').on('click', sendData);
     // $('.operator').on('click', clickedButton);
     // $('.operator').on('click', bundle);  // I can merge my functions
                                             // I am unclear where to place these click listeners
 }
+
+let operator = 0;
+
+function gatherInputs(){
+    if($('#firstNumber').val().length == 0 || $('#secondNumber').val().length == 0) {
+        console.log('Inputs are empty');
+        alert('Please enter both numbers into input boxes.')
+    }
+    if($(this).val() === '+') {
+        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
+        operator = '+';
+        console.log('add', calculationBundle);
+    }
+    if($(this).val() === '-') {
+        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
+        operator = '-';
+        console.log('subtract', calculationBundle);
+    }
+    if($(this).val() === '*') {
+        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
+        operator = '*';
+        console.log('times by', calculationBundle);
+    }
+    if($(this).val() === '/') {
+        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
+        operator = '/';
+        console.log('divide by', calculationBundle);
+    };
+    return operator;
+}
+
+function sendData(){
+    console.log('in POST sendData');
+    $.ajax( {
+        method: 'POST',
+        url: '/numberMunchers',
+        data: {
+            inputOne: $('#firstNumber').val(),
+            inputTwo: $('#secondNumber').val(),        
+            selectedOperator: operator,
+            bundle: calculationBundle,
+        }
+    }).then(function(response) {
+        console.log('response', response);
+        getData();
+    }).catch(function(error) {
+        alert(error);
+    });
+}
+
+function getData() {
+    $.ajax( {
+        method: 'GET',
+        url: '/numberMunchers'
+    }).then(function(response){
+        console.log('response', response);
+        appendDOM(response);
+    });
+}
+
+function appendDOM(array){
+    $('#calcHistory').empty();
+    for(i = 0; i < array.length; i++) {
+        $('#calcHistory').append(`<li>` + array[i].bundle + `</li>`);
+    }
+}
+
+function clearInputs(){
+    $('#firstNumber').val('');
+    $('#secondNumber').val('');
+    $('.operator').removeAttr('disabled');
+}
+
+
+
+
+
+    // clearInputs();
+
 
 // // function to calculate inputs
 // // incorporates whichever math operation was selected in the server
@@ -64,60 +144,6 @@ function onReady() {
 //     });
 // }
 
-let calculationBundle = 0;
-
-function gatherInputs(){
-    if($('#firstNumber').val().length == 0 || $('#secondNumber').val().length == 0) {
-        console.log('Inputs are empty');
-        alert('Please enter both numbers into input boxes.')
-    }
-    if($(this).val() === '+') {
-        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
-        console.log('add', calculationBundle);
-    }
-    if($(this).val() === '-') {
-        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
-        console.log('subtract', calculationBundle);
-    }
-    if($(this).val() === '*') {
-        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
-        console.log('times by', calculationBundle);
-    }
-    if($(this).val() === '/') {
-        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
-        console.log('divide by', calculationBundle);
-    }
-    $('#calcHistory').append(`<li>` + calculationBundle + `</li>`);
-}
-
-function clearInputs(){
-    $('#firstNumber').val('');
-    $('#secondNumber').val('');
-    $('.operator').removeAttr('disabled');
-}
-
-// function sendData(){
-//     console.log('in POST sendData');
-//     let inputOne = $('#firstNumber').val();
-//     let inputTwo = $('#secondNumber').val();
-//     let operator = 
-//     let bundle = calculationBundle;
-//     $.ajax( {
-//         method: 'POST',
-//         url: '/numberMunchers',
-//         data: {data: calculationBundle}
-//     }).then(function(response) {
-//         console.log('response', response);
-//     }).catch(function(error) {
-//         alert(error);
-//     });
-// }
-
-
-
-
-
-    // clearInputs();
 
 
 

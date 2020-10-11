@@ -11,21 +11,19 @@ app.listen(port, () => {
     console.log("Up and running on port: ", port);
 });
 
-// still need to store this value and use it later
-app.post('/operator', (req, res) => {
-    console.log('hello from POST', req.body);
-    operatorValues.push(req.body);
-    res.sendStatus(200);
-});
-
 app.post('/numberMunchers', (req, res) => {
     console.log('hello from POST', req.body);
     calculateThis.push(req.body);
     res.sendStatus(200);
 });
 
+app.get('/numberMunchers', (req, res) => {
+    console.log('hi from GET request');
+    res.send(calculateThis);
+});
+
 calculateThis = [];
-operatorValues = [];
+// operatorValues = [];
 
 // function numberMuncher(inputValues, operatorValues, counter){
 //     console.log('numberMuncher', answer[counter].firstNumber, operatorValues[counter], inputValues[counter].secondNumber);
@@ -79,5 +77,15 @@ operatorValues = [];
 // app.post('/division', (req, res) => {
 //     console.log('hello from /POST/', req.body);
 //     addition.push(req.body);
+//     res.sendStatus(200);
+// });
+
+
+
+
+// still need to store this value and use it later
+// app.post('/operator', (req, res) => {
+//     console.log('hello from POST', req.body);
+//     operatorValues.push(req.body);
 //     res.sendStatus(200);
 // });
