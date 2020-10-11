@@ -8,11 +8,13 @@
         - [x] send object to server via POST
     - [x] `C` button to clear input fields
 - [] server-side logic to compute operations
+    - [] does the computation before sending back OK
     - [x] receives operations symbol
     - [<!-- x -->] stores operations symbol somewhere  
              <!-- not sure if should place array into module -->
     - [] can handle addition, subtraction, multiplication and division
         - [] may be possible to store inputs in module and output results from same module
+        - [] maybe I need two counters running, one to keep track of operations and the other for two inputs. function would only fire if they are matching ???
     - [] after calc is complete, send back OK `sendStatus(200)` ???
     - [] do a GET request after the POST to get the actual calc
 
@@ -20,7 +22,7 @@
 
 - [] on server, keep a record of all operations and solutions
 - [] display a list of all previous calcs on page load
-    - [] this should happend after page loads using GET request
+    - [] this should happen after page loads using GET request
     - [] update list when new calc is made
     - [] history should exist even after page refresh
 

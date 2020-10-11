@@ -13,6 +13,7 @@ function onReady() {
 function clearInputs(){
     $('#firstNumber').val('');
     $('#secondNumber').val('');
+    $('.operations').removeAttr('disabled');
     console.log('Inputs cleared');
 }
 
@@ -35,7 +36,9 @@ function getNumbers(){
     }).catch(function(error) {
         alert(error);
     });
-    //clears input fields
+    // to enable operations buttons again
+    $('.operations').removeAttr('disabled');
+    // clears input fields
     $('#firstNumber').val('');  // maybe I don't want to clear these out ???
     $('#secondNumber').val(''); // maybe I don't want to clear these out ???
     return answer;
@@ -45,6 +48,8 @@ function getNumbers(){
 function operationsSelector(){
     console.log('in operationsSelected');
     console.log($(this).val());
+    // to disable button until inputs submitted
+    $('.operations').attr('disabled','disabled');
     let operations = $(this).val();
     // send data to server via POST request
     $.ajax( {
@@ -61,6 +66,12 @@ function operationsSelector(){
     });
 }
 
-
-
 // maybe write a GET request after the POST, in function get numbers
+
+
+// to disable buttons
+// to disable
+// document.getElementById("btnPlaceOrder").disabled = true; 
+
+// to enable
+// document.getElementById("btnPlaceOrder").disabled = false; 
