@@ -13,16 +13,17 @@ app.listen(port, () => {
 
 app.post('/numberMunchers', (req, res) => {
     console.log('hello from POST', req.body);
-    calculateThis.push(req.body);
+    inputData.push(req.body);
     res.sendStatus(200);
 });
 
 app.get('/numberMunchers', (req, res) => {
     console.log('hi from GET request');
-    res.send(calculateThis);
+    res.send(inputData);
 });
 
-calculateThis = [];
+inputData = [];
+
 // operatorValues = [];
 
 // function numberMuncher(inputValues, operatorValues, counter){
