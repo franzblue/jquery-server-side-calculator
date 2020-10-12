@@ -10,9 +10,8 @@
 - [] server-side logic to compute operations
     - [] does the computation before sending back OK
     - [x] receives operations symbol
-    - [<!-- x -->] stores operations symbol somewhere  
-             <!-- not sure if should place array into module -->
-    - [] can handle addition, subtraction, multiplication and division
+    - [x] stores operations symbol somewhere
+    - [x] can handle addition, subtraction, multiplication and division
         - [] may be possible to store inputs in module and output results from same module
         - [] maybe I need two counters running, one to keep track of operations and the other for two inputs. function would only fire if they are matching ???
     - [] after calc is complete, send back OK `sendStatus(200)` ???

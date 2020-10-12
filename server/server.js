@@ -59,25 +59,3 @@ function numberCruncher(array) {
         }
     }
 }
-
-// function numberMuncherVersionTwo(inputValues, operatorValues, counter){
-//     if(operatorValues[counter] === '='){
-//         let result = inputValues[counter].firstNumber + inputValues[counter].secondNumber;
-//         return result;
-//     }
-//     else if(operatorValues[counter] === '-'){
-//         let result = inputValues[counter].firstNumber - inputValues[counter].secondNumber;
-//         return result;
-//     }
-//     else if(operatorValues[counter] === '*'){
-//         let result = inputValues[counter].firstNumber * inputValues[counter].secondNumber;
-//         return result;
-//     }
-//     else if(operatorValues === '/'){
-//         let result = inputValues[counter].firstNumber / inputValues[counter].secondNumber;
-//         return result;
-//     }
-//     else {
-//         alert('Please enter correct inputs')
-//     }
-// }
