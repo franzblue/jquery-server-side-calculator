@@ -11,26 +11,54 @@ app.listen(port, () => {
     console.log("Up and running on port: ", port);
 });
 
+const calculationHistory = require ('./modules/numberMuncher.js');
+
 app.post('/numberMunchers', (req, res) => {
     console.log('hello from POST', req.body);
-    inputData.push(req.body);
+    let result = numberCruncher(req.body);
+    console.log('result of POST numberCrunch is ', result);
+    calculationHistory.push(result);
+    console.log('calculation history', calculationHistory);
     res.sendStatus(200);
 });
 
 app.get('/numberMunchers', (req, res) => {
     console.log('hi from GET request');
-    res.send(inputData);
+    res.send(calculationHistory);
 });
 
-inputData = [];
-
-// operatorValues = [];
-
-// function numberMuncher(inputValues, operatorValues, counter){
-//     console.log('numberMuncher', answer[counter].firstNumber, operatorValues[counter], inputValues[counter].secondNumber);
-// }
-
-// console.log(numberMuncher(inputValues, operatorValues, counter));
+function numberCruncher(array) {
+    for(i = 0; i < array.length; i++) {
+        if(array[i].operator === '+') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = parseFloat(inputOne) + parseFloat(inputTwo);
+            console.log('numberCruncher result ', result);
+            return result;
+        }
+        else if(array[i].operator === '-') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne - inputTwo;
+            console.log('numberCruncher result ', result);
+            return result;
+        }
+        else if(array[i].operator === '*') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne * inputTwo;
+            console.log('numberCruncher result ', result);
+            return result;
+        }
+        else if(array[i].operator === '/') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne / inputTwo;
+            console.log('numberCruncher result ', result);
+            return result;
+        }
+    }
+}
 
 // function numberMuncherVersionTwo(inputValues, operatorValues, counter){
 //     if(operatorValues[counter] === '='){
@@ -53,40 +81,3 @@ inputData = [];
 //         alert('Please enter correct inputs')
 //     }
 // }
-
-
-// something weird brewing down below
-
-// app.post('/addition', (req, res) => {
-//     console.log('hello from +POST+', req.body);
-//     addition.push(req.body);
-//     res.sendStatus(200);
-// });
-
-// app.post('/subtraction', (req, res) => {
-//     console.log('hello from -POST-', req.body);
-//     addition.push(req.body);
-//     res.sendStatus(200);
-// });
-
-// app.post('/multiplication', (req, res) => {
-//     console.log('hello from *POST*', req.body);
-//     addition.push(req.body);
-//     res.sendStatus(200);
-// });
-
-// app.post('/division', (req, res) => {
-//     console.log('hello from /POST/', req.body);
-//     addition.push(req.body);
-//     res.sendStatus(200);
-// });
-
-
-
-
-// still need to store this value and use it later
-// app.post('/operator', (req, res) => {
-//     console.log('hello from POST', req.body);
-//     operatorValues.push(req.body);
-//     res.sendStatus(200);
-// });

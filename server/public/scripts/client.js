@@ -2,59 +2,53 @@ console.log('hello from js');
 
 $(document).ready(onReady);
 
-// let calculationBundle = 0;
-
 function onReady() {
     getData();
     console.log('Hello from jQuery');
-    $('.operator').on('click', gatherInputs);
+    // $('.operator').on('click', gatherInputs);
     $('#clear').on('click', clearInputs);
     $('#submit').on('click', sendData);
-    // $('.operator').on('click', clickedButton);
-    // $('.operator').on('click', bundle);  // I can merge my functions
-                                            // I am unclear where to place these click listeners
+    $('.operator').on('click', chooseOperator);        
+                  // I am unclear where to place these click listeners
 }
 
-let operator = 0;
-
-function gatherInputs(){
-    if($('#firstNumber').val().length == 0 || $('#secondNumber').val().length == 0) {
-        console.log('Inputs are empty');
-        alert('Please enter both numbers into input boxes.')
-    }
+function chooseOperator() {
     if($(this).val() === '+') {
-        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
         operator = '+';
-        console.log('add', calculationBundle);
+        console.log('operator is', operator);
     }
     if($(this).val() === '-') {
-        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
         operator = '-';
-        console.log('subtract', calculationBundle);
+        console.log('operator is', operator);
     }
     if($(this).val() === '*') {
-        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
         operator = '*';
-        console.log('times by', calculationBundle);
+        console.log('operator is', operator);
     }
     if($(this).val() === '/') {
-        calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
         operator = '/';
-        console.log('divide by', calculationBundle);
-    };
+        console.log('operator is', operator);
+    }
     return operator;
 }
 
 function sendData(){
+    if($('#firstNumber').val().length == 0 || $('#secondNumber').val().length == 0) {
+        console.log('Inputs are empty');
+        alert('Please enter both numbers into input boxes.');
+    }
     console.log('in POST sendData');
+        console.log(numberCruncher([{
+        inputOne: $('#firstNumber').val(),
+        inputTwo: $('#secondNumber').val(),        
+        operator: operator}]));
     $.ajax( {
         method: 'POST',
         url: '/numberMunchers',
         data: {
             inputOne: $('#firstNumber').val(),
             inputTwo: $('#secondNumber').val(),        
-            selectedOperator: operator,
-            bundle: calculationBundle,
+            operator: operator,
         }
     }).then(function(response) {
         console.log('response', response);
@@ -74,163 +68,114 @@ function getData() {
     });
 }
 
-function appendDOM(array){
+function appendDOM(dataToAppend){
     $('#calcHistory').empty();
-    for(i = 0; i < array.length; i++) {
-        $('#calcHistory').append(`<li>` + array[i].bundle + `</li>`);
-    }
+    // let append = dataToAppend;
+        $('#calcHistory').append('<li>helloworld</li>');
 }
 
 function clearInputs(){
     $('#firstNumber').val('');
     $('#secondNumber').val('');
-    $('.operator').removeAttr('disabled');
 }
 
+function numberCruncher(array) {
+    for(i = 0; i < array.length; i++) {
+        if(array[i].operator === '+') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = parseFloat(inputOne) + parseFloat(inputTwo);
+            console.log('numberCruncher result is ', result);
+            return result;
+        }
+        else if(array[i].operator === '-') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne - inputTwo;
+            console.log('numberCruncher result is ', result);
+            return result;
+        }
+        else if(array[i].operator === '*') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne * inputTwo;
+            console.log('numberCruncher result is ', result);
+            return result;
+        }
+        else if(array[i].operator === '/') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne / inputTwo;
+            console.log('numberCruncher result is ', result);
+            return result;
+        }
+    }
+}
 
+// let calculationBundle = 0;
 
-
-
-    // clearInputs();
-
-
-// // function to calculate inputs
-// // incorporates whichever math operation was selected in the server
 // function gatherInputs(){
-//     console.log('in crunchNumbers');
-//     let answer = {
-//         firstNumber: $('#firstNumber').val(),
-//         operator: $(this).val(), // this is almost what I need
-//         secondNumber: $('#secondNumber').val(),
+//     if($(this).val() === '+') {
+//         calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val();
 //     }
-//     console.log('Inputs as an object, being POSTed to server ', answer);
-    // $.ajax( {
-    //     method: 'POST',
-    //     url: '/numberMunchers',
-    //     data: answer,
-    // }).then(function(response) {
-    //     console.log('response', response);
-    // }).catch(function(error) {
-    //     alert(error);
-//     });
-//     clearInputs;
-//     // // to enable operator buttons again
-//     // $('.operator').removeAttr('disabled');
-//     // // clears input fields
-//     // $('#firstNumber').val('');  // maybe I don't want to clear these out ???
-//     // $('#secondNumber').val(''); // maybe I don't want to clear these out ???
-//     return answer;
+//     if($(this).val() === '-') {
+//         calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val();
+//     }
+//     if($(this).val() === '*') {
+//         calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val();
+//     }
+//     if($(this).val() === '/') {
+//         calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val();
+//     }
+//     console.log(calculateBundle);
+//     return calculationBundle;
 // }
-
-// // this will send the selected operation to the server
-// function operatorButton(){
-//     console.log('in operatorButton');
-//     console.log($(this).val());
-//     // to disable button until inputs submitted
-//     $('.operator').attr('disabled','disabled');
-//     let operatorValue = $(this).val();
-//     // send data to server via POST request
-//     $.ajax( {
-//         method: 'POST',
-//         url: '/operator',
-//         data: {
-//             operatorValue,
-//         }
-//     }).then(function(response) {
-//         console.log('response', response);
-//     }).catch(function(error) {
-//         // notify the user of an error in POST request
-//         alert(error);
-//     });
-// }
-
-
-
-
 
 // maybe write a GET request after the POST, in function get numbers
 
-
-// to disable buttons
-// to disable
-// document.getElementById("btnPlaceOrder").disabled = true; 
-
-// to enable
-// document.getElementById("btnPlaceOrder").disabled = false; 
-
-// function operatorSelction(){
-//     if($(this).id === 'addition')
+// function gatherInputs() {
+//     let calculationBundle = 0;
+//     if($(this).val() === '+') {
+//         calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val();
+//     }
+//     if($(this).val() === '-') {
+//         calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val();
+//     }
+//     if($(this).val() === '*') {
+//         calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val();
+//     }
+//     if($(this).val() === '/') {
+//         calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val();
+//     }
+//     return calculationBundle;
 // }
 
 
-
-
-
-
-
-
-
-// function graveyard!!!!!
-
-
-
-
-// $.ajax( {
-//     method: 'POST',
-//     url: '/numberMunchers',
-//     data: {
-//         inputOne: $('#firstNumber').val(),
-//         inputTwo: $('#secondNumber').val(),
-//         operator: '+',
-//         calculationBundle: calculationBundle
+// function gatherInputs(){
+    // if($('#firstNumber').val().length == 0 || $('#secondNumber').val().length == 0) {
+    //     console.log('Inputs are empty');
+    //     alert('Please enter both numbers into input boxes.')
+    //     return;
+//     // }
+//     if($(this).val() === '+') {
+//         // calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
+//         operator = '+';
+//         // console.log('add', calculationBundle);
 //     }
-// }).then(function(response) {
-//     console.log('response', response);
-// }).catch(function(error) {
-//     alert(error);
-// });
-
-// $.ajax( {
-//     method: 'POST',
-//     url: '/numberMunchers',
-//     data: {
-//         inputOne: $('#firstNumber').val(),
-//         inputTwo: $('#secondNumber').val(),
-//         operator: '-',
-//         calculationBundle: calculationBundle
+//     if($(this).val() === '-') {
+//         // calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
+//         operator = '-';
+//         // console.log('subtract', calculationBundle);
 //     }
-// }).then(function(response) {
-//     console.log('response', response);
-// }).catch(function(error) {
-//     alert(error);
-// });
-
-// $.ajax( {
-//     method: 'POST',
-//     url: '/numberMunchers',
-//     data: {
-//         inputOne: $('#firstNumber').val(),
-//         inputTwo: $('#secondNumber').val(),
-//         operator: '*',
-//         calculationBundle: calculationBundle
+//     if($(this).val() === '*') {
+//         // calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
+//         operator = '*';
+//         // console.log('times by', calculationBundle);
 //     }
-// }).then(function(response) {
-//     console.log('response', response);
-// }).catch(function(error) {
-//     alert(error);
-// });
-
-// $.ajax( {
-//     method: 'POST',
-//     url: '/numberMunchers',
-//     data: {
-//         inputOne: $('#firstNumber').val(),
-//         inputTwo: $('#secondNumber').val(),
-//         operator: '/',
-//         calculationBundle: calculationBundle
-//     }
-// }).then(function(response) {
-//     console.log('response', response);
-// }).catch(function(error) {
-//     alert(error);
-// });
+//     if($(this).val() === '/') {
+//         // calculationBundle = $('#firstNumber').val() + ' ' + $(this).val() + ' ' + $('#secondNumber').val() + ' = ';
+//         operator = '/';
+//         // console.log('divide by', calculationBundle);
+//     };
+//     return operator;
+// }

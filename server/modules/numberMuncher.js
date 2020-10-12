@@ -1,43 +1,36 @@
+function numberCruncher(array) {
+    for(i = 0; i < array.length; i++) {
+        if(array[i].operator === '+') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = parseFloat(inputOne) + parseFloat(inputTwo);
+            console.log('numberCruncher result ', result);
+            return result;
+        }
+        else if(array[i].operator === '-') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne - inputTwo;
+            console.log('numberCruncher result ', result);
+            return result;
+        }
+        else if(array[i].operator === '*') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne * inputTwo;
+            console.log('numberCruncher result ', result);
+            return result;
+        }
+        else if(array[i].operator === '/') {
+            let inputOne = array[i].inputOne;
+            let inputTwo = array[i].inputTwo;
+            let result = inputOne / inputTwo;
+            console.log('numberCruncher result ', result);
+            return result;
+        }
+    }
+}
 
+let calculationHistory = [];
 
-// function numberCruncher(array) {
-//     let result = [];
-//     for(i = 0; i < array.length; i++) {
-//         if(array[i].operator.val() === '+') {
-//             // result = array[i].input.val() + array[i].inputTwo.val();
-//             result.push(array[i].input.val() + array[i].inputTwo.val())
-//         }
-//         else if(array[i].operator.val() === '-') {
-//             // result = array[i].input.val() - array[i].inputTwo.val();
-//             result.push(array[i].input.val() - array[i].inputTwo.val())
-//         }
-//         else if(array[i].operator.val() === '*') {
-//             // result = array[i].input.val() * array[i].inputTwo.val();
-//             result.push(array[i].input.val() * array[i].inputTwo.val())
-//         }
-//         else if(array[i].operator.val() === '/') {
-//             // result = array[i].input.val() / array[i].inputTwo.val();
-//             result.push(array[i].input.val() / array[i].inputTwo.val())
-//         }
-//         else { return 0;}
-//     }
-// }
-
-// module.exports = numberCruncher();
-
-
-
-
-
-
-
-// this module is under construction !!!
-
-
-// const numberCruncher = require ('./modules/numberMuncher.js');
-
-
-// app.get('/numberCrunchers', (req, res) => {
-//     console.log('hi from GET request');
-//     res.send(numberCruncher(inputData));
-// });
+module.exports = calculationHistory;
