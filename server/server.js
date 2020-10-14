@@ -15,47 +15,34 @@ const calculationHistory = require ('./modules/numberMuncher.js');
 
 app.post('/numberMunchers', (req, res) => {
     console.log('hello from POST', req.body);
-    let result = numberCruncher(req.body);
-    console.log('result of POST numberCrunch is ', result);
-    calculationHistory.push(result);
-    console.log('calculation history', calculationHistory);
-    res.sendStatus(200);
+    let result = 0;
+        if(req.body.operator === '+') {
+            result = Number(req.body.inputOne) + Number(req.body.inputTwo);
+        }
+        else if(req.body.operator === '-') {
+            result = Number(req.body.inputOne) - Number(req.body.inputTwo);
+        }
+        else if(req.body.operator === '*') {
+            result = Number(req.body.inputOne) * Number(req.body.inputTwo);
+        }
+        else if(req.body.operator === '/') {
+            result = Number(req.body.inputOne) / Number(req.body.inputTwo);
+        }
+        answer = {
+            answer: result
+        }
+    res.send(answer);
+    let historyObject = {
+        num1: req.body.inputOne,
+        operator: req.body.operator,
+        num2: req.body.inputTwo,
+        answer: result
+    }
+    calculationHistory.push(historyObject);
+    console.log('history', calculationHistory);
 });
 
 app.get('/numberMunchers', (req, res) => {
     console.log('hi from GET request');
     res.send(calculationHistory);
 });
-
-function numberCruncher(array) {
-    for(i = 0; i < array.length; i++) {
-        if(array[i].operator === '+') {
-            let inputOne = array[i].inputOne;
-            let inputTwo = array[i].inputTwo;
-            let result = parseFloat(inputOne) + parseFloat(inputTwo);
-            console.log('numberCruncher result ', result);
-            return result;
-        }
-        else if(array[i].operator === '-') {
-            let inputOne = array[i].inputOne;
-            let inputTwo = array[i].inputTwo;
-            let result = inputOne - inputTwo;
-            console.log('numberCruncher result ', result);
-            return result;
-        }
-        else if(array[i].operator === '*') {
-            let inputOne = array[i].inputOne;
-            let inputTwo = array[i].inputTwo;
-            let result = inputOne * inputTwo;
-            console.log('numberCruncher result ', result);
-            return result;
-        }
-        else if(array[i].operator === '/') {
-            let inputOne = array[i].inputOne;
-            let inputTwo = array[i].inputTwo;
-            let result = inputOne / inputTwo;
-            console.log('numberCruncher result ', result);
-            return result;
-        }
-    }
-}

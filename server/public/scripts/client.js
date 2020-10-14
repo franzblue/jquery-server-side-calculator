@@ -1,11 +1,10 @@
 $(document).ready(onReady);
 
 function onReady() {
-    getData();
+    getHistory();
     $('#clear').on('click', clearInputs);
     $('#submit').on('click', sendData);
     $('.operator').on('click', chooseOperator);        
-                  // I am unclear where to place these click listeners
 }
 
 function chooseOperator() {
@@ -44,31 +43,43 @@ function sendData(){
         }
     }).then(function(response) {
         console.log('response', response);
-        getData();
+        let el = $('#answer');
+        el.empty();
+        el.append('The answer is ', response.answer);
+        getHistory();
     }).catch(function(error) {
         alert(error);
     });
 }
 
-function getData() {
+function getHistory() {
     $.ajax( {
         method: 'GET',
         url: '/numberMunchers'
     }).then(function(response){
         console.log('response', response);
-        appendDOM(response);
+        let el = $('#calcHistory');
+        el.empty();
+        for(let i = 0; i < response.length; i++) {
+        //     el.append(`<li>${response[i].num1} ${response[i].operator} 
+        //                         ${response[i].num2} = ${response[i].answer}{</li>
+        // `)}    need to fix this
+            el.append(`<li>HelloWorld{</li>`)}
+    }).catch(function(error) {
+        alert('oops');
+        console.log(error);
     });
 }
 
-function appendDOM(dataToAppend){
-    $('#calcHistory').empty();
-    // let append = dataToAppend;
-    for(let i = 0; i< dataToAppend.length; i++) {
-        $('#calcHistory').append(`
-            <li>helloworld</li>
-        `);
-    }
-}
+// function appendDOM(dataToAppend){
+//     $('#calcHistory').empty();
+//     // let append = dataToAppend;
+//     for(let i = 0; i< dataToAppend.length; i++) {
+//         $('#calcHistory').append(`
+//             <li>helloworld</li>
+//         `);
+//     }
+// }
 
 function clearInputs(){
     $('#firstNumber').val('');
