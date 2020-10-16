@@ -61,10 +61,9 @@ function getHistory() {
         let el = $('#calcHistory');
         el.empty();
         for(let i = 0; i < response.length; i++) {
-        //     el.append(`<li>${response[i].num1} ${response[i].operator} 
-        //                         ${response[i].num2} = ${response[i].answer}{</li>
-        // `)}    need to fix this
-            el.append(`<li>HelloWorld{</li>`)}
+            el.append(`<li>${response[i].num1} ${response[i].operator} 
+                                ${response[i].num2} = ${response[i].answer}{</li>
+        `)}
     }).catch(function(error) {
         alert('oops');
         console.log(error);

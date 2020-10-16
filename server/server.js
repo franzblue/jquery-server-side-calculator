@@ -11,7 +11,7 @@ app.listen(port, () => {
     console.log("Up and running on port: ", port);
 });
 
-const calculationHistory = require ('./modules/numberMuncher.js');
+let calculationHistory = [];
 
 app.post('/numberMunchers', (req, res) => {
     console.log('hello from POST', req.body);
