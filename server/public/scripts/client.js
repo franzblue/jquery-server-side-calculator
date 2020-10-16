@@ -62,7 +62,7 @@ function getHistory() {
         el.empty();
         for(let i = 0; i < response.length; i++) {
             el.append(`<li>${response[i].num1} ${response[i].operator} 
-                                ${response[i].num2} = ${response[i].answer}{</li>
+                                ${response[i].num2} = ${response[i].answer}</li>
         `)}
     }).catch(function(error) {
         alert('oops');
